@@ -5,7 +5,7 @@ import "core:time"
 import "core:c/libc"
 import x "vendor:x11/xlib"
 
-MOVE_SEQUENCE := [4]x.KeySym{.XK_Up, .XK_Left, .XK_Down, .XK_Right}
+MOVE_SEQUENCE := [4]x.KeySym{.XK_Right, .XK_Up, .XK_Right, .XK_Down}
 REPEAT_COUNT :: 5
 KEY_DELAY_MS :: 80  // Delay between key presses in milliseconds
 
@@ -27,13 +27,13 @@ simulate_key_press :: proc(display: ^x.Display, keysym: x.KeySym) {
 	// Press and release the key using XTest
 	XTestFakeKeyEvent(display, cast(u32)keycode, true, 0)
 	x.Flush(display)
-	time.sleep(time.Millisecond * 10)
+	time.sleep(time.Millisecond * 50)
 	XTestFakeKeyEvent(display, cast(u32)keycode, false, 0)
 	x.Flush(display)
 }
 
 perform_difficult_move :: proc(display: ^x.Display) {
-	fmt.println("Performing difficult move: (Up, Left, Down, Right) x", REPEAT_COUNT)
+	fmt.println("Performing difficult move: (Right, Up, Left, Down) x", REPEAT_COUNT)
 	
 	for i in 0..<REPEAT_COUNT {
 		fmt.println("  Cycle", i + 1, "of", REPEAT_COUNT)
@@ -48,7 +48,7 @@ perform_difficult_move :: proc(display: ^x.Display) {
 
 main :: proc() {
 	fmt.println("=== Snake Difficult Move Macro ===")
-	fmt.println("Move sequence: Up -> Left -> Down -> Right (x5)")
+	fmt.println("Move sequence: Right -> Up -> Left -> Down (x5)")
 	fmt.println("")
 	fmt.println("Press Ctrl+F1 to trigger the macro")
 	fmt.println("Press Ctrl+C to exit")
