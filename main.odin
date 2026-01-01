@@ -94,7 +94,7 @@ main :: proc() {
 			has_ctrl := .ControlMask in key_event.state
 			if keysym == .XK_F1 && has_ctrl {
 				fmt.println("")
-				fmt.println("Ctrl+F1 pressed! Starting macro in 500ms...")
+				fmt.println("Ctrl+F1 pressed! Starting macro")
 				
 				perform_difficult_move(display)
 				
