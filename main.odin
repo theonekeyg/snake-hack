@@ -96,9 +96,6 @@ main :: proc() {
 				fmt.println("")
 				fmt.println("Ctrl+F1 pressed! Starting macro in 500ms...")
 				
-				// Brief delay to let user release keys
-				time.sleep(time.Millisecond * 500)
-				
 				perform_difficult_move(display)
 				
 				fmt.println("")
